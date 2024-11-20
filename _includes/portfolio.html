@@ -1,96 +1,108 @@
-<section class="no-padding" id="portfolio">
-    <div class="container-fluid">
-        <div class="row no-gutter">
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="portfolio-box">
-                    <img src="img/portfolio/1.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
-                            </div>
-                            <div class="project-name">
-                                Project Name
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="portfolio-box">
-                    <img src="img/portfolio/2.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
-                            </div>
-                            <div class="project-name">
-                                Project Name
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="portfolio-box">
-                    <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
-                            </div>
-                            <div class="project-name">
-                                Project Name
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="portfolio-box">
-                    <img src="img/portfolio/4.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
-                            </div>
-                            <div class="project-name">
-                                Project Name
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="portfolio-box">
-                    <img src="img/portfolio/5.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
-                            </div>
-                            <div class="project-name">
-                                Project Name
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <a href="#" class="portfolio-box">
-                    <img src="img/portfolio/6.jpg" class="img-responsive" alt="">
-                    <div class="portfolio-box-caption">
-                        <div class="portfolio-box-caption-content">
-                            <div class="project-category text-faded">
-                                Category
-                            </div>
-                            <div class="project-name">
-                                Project Name
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+<div class="portfolio-section">
+  <h2 class="section-title">Esperanza's Drug Discovery Pipeline</h2>
+  <div class="graph-container">
+    <canvas id="pipelineGraph" style="width: 100%; height: 500px;"></canvas>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const pipelineData = [
+      { "disease": "TNBC", "target": "sEH", "stage": "Preclinical Development" },
+      { "disease": "SUD", "target": "DAT", "stage": "Lead Optimization" }
+    ];
+    const stagesData = [
+      "Target Validation",
+      "Hit Identification",
+      "Hit to Lead",
+      "Lead Optimization",
+      "Preclinical Development",
+      "Phase I",
+      "Phase II",
+      "Phase III",
+      "Clinically Approved"
+    ];
+    
+    const labels = pipelineData.map(drug => `${drug.disease} / ${drug.target}`);
+    const data = pipelineData.map(drug => stagesData.indexOf(drug.stage));
+
+    const ctx = document.getElementById('pipelineGraph').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Drug Development Stage',
+          backgroundColor: '#F05F40',
+          data: data,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        scales: {
+          x: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Development Stages'
+            },
+            ticks: {
+              callback: function(value) {
+                return stagesData[value];
+              },
+              autoSkip: false,
+              maxRotation: 45,
+              minRotation: 45,
+              stepSize: 1,
+              max: stagesData.length - 1
+            },
+            labels: stagesData,
+            suggestedMax: stagesData.length - 1
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Drug Indication / Target'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: 'Drug Development Stages'
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `Stage: ${stagesData[context.raw]}`;
+              }
+            }
+          }
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .portfolio-section {
+    text-align: center;
+    margin: 3rem;
+  }
+
+  .graph-container {
+    overflow-x: auto;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+</style>
