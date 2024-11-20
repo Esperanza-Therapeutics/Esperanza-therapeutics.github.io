@@ -8,7 +8,7 @@
         </div>
         <div class="row">
             <!-- Suzanne Thomlinson -->
-            <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            <div class="col-lg-4 col-md-6 col-sm-12 text-center mb-4">
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <!-- Nadia German -->
-            <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            <div class="col-lg-4 col-md-6 col-sm-12 text-center mb-4">
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
@@ -42,11 +42,11 @@
                 </div>
             </div>
             <!-- Reid T. Powell -->
-            <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            <div class="col-lg-4 col-md-6 col-sm-12 text-center mb-4">
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <img src="/img/RTP.jpg" alt="Reid T. Powell" class="img-fluid">
+                            <img src="/img/RTP.png" alt="Reid T. Powell" class="img-fluid">
                             <h3>Reid T. Powell</h3>
                             <p>CTO</p>
                         </div>
@@ -92,7 +92,7 @@
         color: black;
     }
     .flip-card-back {
-        background-color: #F05F40;
+        background-color: #2980b9;
         color: white;
         transform: rotateY(180deg);
         display: flex;
@@ -113,6 +113,11 @@
     @media (max-width: 768px) {
         .flip-card {
             height: 400px;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .flip-card-inner {
             transform-style: preserve-3d;
