@@ -316,58 +316,73 @@ header {
 }
 
 //Team
-  .flip-card {
-      background-color: transparent;
-      width: 100%;
-      height: 300px;
-      perspective: 1000px;
-      margin-bottom: 30px;
-  }
-  .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-  }
-  .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-  }
-  .flip-card-front, .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden; // This hides the backside when flipped
-      -webkit-backface-visibility: hidden; // Ensures compatibility with Safari
-  }
-  .flip-card-front {
-      background-color: #fff;
-      color: black;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-  }
-  .flip-card-back {
-      background-color: #F05F40;
-      color: white;
-      transform: rotateY(180deg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-  }
-  .flip-card-back-content {
-      text-align: center;
-  }
-  .img-fluid {
-      max-width: 80%;
-      height: auto;
-      border-radius: 50%;
-      margin-bottom: 15px;
-  }
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 300px;
+    perspective: 1000px;
+    margin-bottom: 30px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d; // Keep 3D perspective preserved on rotation
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+  
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden; // For Safari and older WebKit browsers
+    -moz-backface-visibility: hidden;    // For Firefox
+    -o-backface-visibility: hidden;      // For Opera
+    -ms-backface-visibility: hidden;     // For IE
+}
+
+.flip-card-front {
+    background-color: #fff;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    z-index: 2; // This keeps the front on top before flipping
+}
+
+.flip-card-back {
+    background-color: #F05F40;
+    color: white;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    z-index: 1; // This keeps the back beneath until flipped
+}
+
+.flip-card-back-content {
+    text-align: center;
+}
+.img-fluid {
+    max-width: 80%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
   
 @media (max-width: 768px) {
     .flip-card {
