@@ -97,7 +97,7 @@
         padding: 10px;
     }
     .flip-card-back {
-        background-color: #2980b9;
+        background-color: #F05F40;
         color: white;
         transform: rotateY(180deg);
         display: flex;
@@ -109,7 +109,7 @@
         text-align: center;
     }
     .img-fluid {
-        max-width: 100%;
+        max-width: 80%;
         height: auto;
         border-radius: 50%;
         margin-bottom: 15px;
@@ -125,16 +125,23 @@
         .flip-card-front, .flip-card-back {
             height: auto;
         }
+        .row {
+            justify-content: center;
+        }
     }
     @media (max-width: 576px) {
         .flip-card {
             margin-bottom: 20px;
+            height: auto;
         }
         .flip-card-inner {
             transform: none;
         }
         .flip-card:hover .flip-card-inner {
             transform: none;
+        }
+        .img-fluid {
+            max-width: 70%;
         }
     }
 </style>
