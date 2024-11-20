@@ -14,7 +14,7 @@
                         <div class="flip-card-front">
                             <img src="/img/ST.jpg" alt="Suzanne Thomlinson" class="img-fluid">
                             <h3>Suzanne Thomlinson</h3>
-                            <p>CEO</p>
+                            <p>Chief executive officer (CEO)</p>
                         </div>
                         <div class="flip-card-back">
                             <div class="flip-card-back-content">
@@ -31,7 +31,7 @@
                         <div class="flip-card-front">
                             <img src="/img/NG.png" alt="Nadia German" class="img-fluid">
                             <h3>Nadia German</h3>
-                            <p>CSO</p>
+                            <p>Chief scientific officer (CSO)</p>
                         </div>
                         <div class="flip-card-back">
                             <div class="flip-card-back-content">
@@ -48,7 +48,7 @@
                         <div class="flip-card-front">
                             <img src="/img/RTP.jpg" alt="Reid T. Powell" class="img-fluid">
                             <h3>Reid T. Powell</h3>
-                            <p>CTO</p>
+                            <p>Chief technology officer (CTO)</p>
                         </div>
                         <div class="flip-card-back">
                             <div class="flip-card-back-content">
@@ -112,15 +112,24 @@
 
     @media (max-width: 768px) {
         .flip-card {
-            height: 400px;
-        }
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            height: auto;
         }
         .flip-card-inner {
             transform-style: preserve-3d;
+        }
+        .flip-card-front, .flip-card-back {
+            height: auto;
+        }
+    }
+    @media (max-width: 576px) {
+        .flip-card {
+            margin-bottom: 20px;
+        }
+        .flip-card-inner {
+            transform: none;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: none;
         }
     }
 </style>
