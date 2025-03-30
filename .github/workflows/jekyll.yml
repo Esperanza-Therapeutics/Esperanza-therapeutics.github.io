@@ -37,7 +37,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1'   # Specify the Ruby version required by your project.
+          ruby-version: '3.0.2'   # Specify the Ruby version required by your project.
           bundler-cache: true   # Enable caching of gems to speed up subsequent builds.
           cache-version: 0      # Increment this value to force cache refresh if needed.
 
