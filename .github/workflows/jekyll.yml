@@ -5,73 +5,55 @@
 name: Deploy Jekyll site to Pages
 
 on:
-  # Trigger the workflow when there is a push to the "main" branch.
   push:
     branches: ["main"]
-  # Allow manual workflow dispatch from the Actions tab.
   workflow_dispatch:
 
-# Set minimal required permissions for security purposes.
 permissions:
-  contents: read        # Read access to repository contents.
-  pages: write          # Write access for GitHub Pages deployment.
-  id-token: write       # Write access to create OIDC tokens if needed.
+  contents: read
+  pages: write
+  id-token: write
 
-# Concurrency settings ensure that only one deployment runs at a time.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # The build job compiles the Jekyll site.
   build:
-    # Use the latest GitHub-hosted runner. "ubuntu-latest" currently maps to ubuntu-24.04.
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Check out the repository code.
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Step 2: Set up Ruby environment.
-      # The official ruby/setup-ruby action installs the specified Ruby version and caches gem installations.
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0.2'   # Specify the Ruby version required by your project.
-          bundler-cache: true   # Enable caching of gems to speed up subsequent builds.
-          cache-version: 0      # Increment this value to force cache refresh if needed.
+          ruby-version: '3.1'
+          bundler-cache: true
+          cache-version: 0
 
-      # Step 3: Update Sass gem to fix dependency issues.
-      - name: Update Sass
+      - name: Update Sass Gem
         run: bundle update sass
 
-      # Step 4: Configure GitHub Pages.
-      # This action sets up environment variables required for deploying your site.
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
 
-      # Step 5: Build the Jekyll site.
-      # The site is built using Bundler and Jekyll, with the base URL provided by the Pages action.
       - name: Build with Jekyll
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
-          JEKYLL_ENV: production  # Ensure that the build is optimized for production.
+          JEKYLL_ENV: production
 
-      # Step 6: Upload the built site as an artifact for deployment.
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
-  # The deploy job handles the deployment of the built site to GitHub Pages.
   deploy:
-    # Specify the environment for the deployment; this is useful for review apps and GitHub Pages environments.
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}  # This URL will be available after deployment.
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build  # Ensure that the build job completes successfully before deploying.
+    needs: build
     steps:
-      # Step 7: Deploy the site to GitHub Pages.
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
